@@ -1,1 +1,216 @@
-# yuganraj-432
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ComicCraft - The Last Hero</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #111827;
+      color: white;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 15px;
+      background: #1f2937;
+    }
+
+    header h1 {
+      font-size: 36px;
+      color: #facc15;
+    }
+
+    header p {
+      margin-top: 8px;
+      color: #d1d5db;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 15px;
+    }
+
+    .hero-card {
+      background: #1f2937;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    .hero-card h2 {
+      color: #facc15;
+      margin-bottom: 10px;
+    }
+
+    .comic-panel {
+      background: white;
+      color: #111827;
+      border-radius: 15px;
+      margin: 25px 0;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+
+    .panel-image {
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #312e81, #7c2d12);
+      font-size: 70px;
+    }
+
+    .panel-content {
+      padding: 20px;
+    }
+
+    .panel-content h3 {
+      color: #dc2626;
+      margin-bottom: 10px;
+    }
+
+    .narration {
+      background: #f3f4f6;
+      border-left: 5px solid #facc15;
+      padding: 12px;
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    button {
+      display: block;
+      margin: 25px auto;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 10px;
+      background: #facc15;
+      color: #111827;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #eab308;
+    }
+
+    #message {
+      text-align: center;
+      margin-top: 15px;
+      color: #86efac;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>ComicCraft</h1>
+    <p>AI Comic Story Creator</p>
+  </header>
+
+  <div class="container">
+
+    <div class="hero-card">
+      <h2>Hero: The Last Hero</h2>
+
+      <p>
+        The Last Hero is the final hope of humanity in a world filled
+        with darkness and danger. With extraordinary powers, unmatched
+        courage, and a strong heart, he fights powerful enemies to save
+        the world. Even when everyone loses hope, he stands alone to
+        protect humanity and bring peace to the world.
+      </p>
+    </div>
+
+    <div class="comic-panel">
+      <div class="panel-image">🌆</div>
+
+      <div class="panel-content">
+        <h3>Panel 1 — The Dark City</h3>
+
+        <p>
+          A powerful enemy attacks the city. Darkness covers the streets
+          and people are searching for hope.
+        </p>
+
+        <div class="narration">
+          "When darkness rises, one hero must stand."
+        </div>
+      </div>
+    </div>
+
+    <div class="comic-panel">
+      <div class="panel-image">🦸</div>
+
+      <div class="panel-content">
+        <h3>Panel 2 — The Last Hero</h3>
+
+        <p>
+          The Last Hero appears and faces the enemy without fear.
+          He knows that the future of humanity depends on him.
+        </p>
+
+        <div class="narration">
+          "I may be the last one standing, but I will never give up."
+        </div>
+      </div>
+    </div>
+
+    <div class="comic-panel">
+      <div class="panel-image">⚡</div>
+
+      <div class="panel-content">
+        <h3>Panel 3 — Final Battle</h3>
+
+        <p>
+          The hero uses his power and courage to fight the enemy.
+          The final battle begins.
+        </p>
+
+        <div class="narration">
+          "This is not the end. This is where our story begins."
+        </div>
+      </div>
+    </div>
+
+    <button onclick="generateComic()">
+      Generate Comic
+    </button>
+
+    <div id="message"></div>
+
+  </div>
+
+  <footer>
+    © 2026 ComicCraft — AI Comic Story Creator
+  </footer>
+
+  <script>
+    function generateComic() {
+      document.getElementById("message").innerHTML =
+        "✨ Comic generated successfully — The Last Hero!";
+    }
+  </script>
+
+</body>
+</html>
