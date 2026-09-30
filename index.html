@@ -1,216 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ComicCraft - The Last Hero</title>
+<title>ComicCraft - AI Comic Story Creator</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #111827;
-      color: white;
-    }
+body{
+    font-family:Arial,sans-serif;
+    background:#111827;
+    color:white;
+}
 
-    header {
-      text-align: center;
-      padding: 30px 15px;
-      background: #1f2937;
-    }
+header{
+    text-align:center;
+    padding:30px 15px;
+    background:#1f2937;
+}
 
-    header h1 {
-      font-size: 36px;
-      color: #facc15;
-    }
+header h1{
+    font-size:36px;
+    color:#facc15;
+}
 
-    header p {
-      margin-top: 8px;
-      color: #d1d5db;
-    }
+header p{
+    margin-top:10px;
+    color:#d1d5db;
+}
 
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 15px;
-    }
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:25px 15px;
+}
 
-    .hero-card {
-      background: #1f2937;
-      border-radius: 15px;
-      padding: 25px;
-      margin-bottom: 25px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    }
+.card{
+    background:#1f2937;
+    padding:25px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
 
-    .hero-card h2 {
-      color: #facc15;
-      margin-bottom: 10px;
-    }
+.card h2{
+    color:#facc15;
+    margin-bottom:15px;
+}
 
-    .comic-panel {
-      background: white;
-      color: #111827;
-      border-radius: 15px;
-      margin: 25px 0;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-    }
+input, textarea, select{
+    width:100%;
+    padding:13px;
+    margin:8px 0 15px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+}
 
-    .panel-image {
-      height: 220px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #312e81, #7c2d12);
-      font-size: 70px;
-    }
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
 
-    .panel-content {
-      padding: 20px;
-    }
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    background:#facc15;
+    color:#111827;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
 
-    .panel-content h3 {
-      color: #dc2626;
-      margin-bottom: 10px;
-    }
+button:hover{
+    background:#eab308;
+}
 
-    .narration {
-      background: #f3f4f6;
-      border-left: 5px solid #facc15;
-      padding: 12px;
-      margin-top: 12px;
-      font-style: italic;
-    }
+#comicOutput{
+    display:none;
+}
 
-    button {
-      display: block;
-      margin: 25px auto;
-      padding: 14px 28px;
-      border: none;
-      border-radius: 10px;
-      background: #facc15;
-      color: #111827;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.panel{
+    background:white;
+    color:#111827;
+    border-radius:15px;
+    margin:20px 0;
+    overflow:hidden;
+}
 
-    button:hover {
-      background: #eab308;
-    }
+.panel-image{
+    height:230px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:70px;
+    background:linear-gradient(135deg,#312e81,#7c2d12);
+}
 
-    #message {
-      text-align: center;
-      margin-top: 15px;
-      color: #86efac;
-      font-weight: bold;
-    }
+.panel-content{
+    padding:20px;
+}
 
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #9ca3af;
-    }
-  </style>
+.panel-content h3{
+    color:#dc2626;
+    margin-bottom:10px;
+}
+
+.narration{
+    margin-top:12px;
+    padding:12px;
+    background:#f3f4f6;
+    border-left:5px solid #facc15;
+    font-style:italic;
+}
+
+.success{
+    text-align:center;
+    color:#86efac;
+    margin:15px 0;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    color:#9ca3af;
+}
+</style>
 </head>
 
 <body>
 
-  <header>
+<header>
     <h1>ComicCraft</h1>
-    <p>AI Comic Story Creator</p>
-  </header>
+    <p>AI Comic Story Creator using Gemini Models</p>
+</header>
 
-  <div class="container">
+<div class="container">
 
-    <div class="hero-card">
-      <h2>Hero: The Last Hero</h2>
+<div class="card">
+    <h2>Create Your Comic</h2>
 
-      <p>
-        The Last Hero is the final hope of humanity in a world filled
-        with darkness and danger. With extraordinary powers, unmatched
-        courage, and a strong heart, he fights powerful enemies to save
-        the world. Even when everyone loses hope, he stands alone to
-        protect humanity and bring peace to the world.
-      </p>
-    </div>
+    <label>Hero Name</label>
+    <input type="text" id="heroName"
+           placeholder="Enter hero name">
 
-    <div class="comic-panel">
-      <div class="panel-image">🌆</div>
+    <label>Comic Description</label>
+    <textarea id="description"
+        placeholder="Describe your comic story..."></textarea>
 
-      <div class="panel-content">
-        <h3>Panel 1 — The Dark City</h3>
-
-        <p>
-          A powerful enemy attacks the city. Darkness covers the streets
-          and people are searching for hope.
-        </p>
-
-        <div class="narration">
-          "When darkness rises, one hero must stand."
-        </div>
-      </div>
-    </div>
-
-    <div class="comic-panel">
-      <div class="panel-image">🦸</div>
-
-      <div class="panel-content">
-        <h3>Panel 2 — The Last Hero</h3>
-
-        <p>
-          The Last Hero appears and faces the enemy without fear.
-          He knows that the future of humanity depends on him.
-        </p>
-
-        <div class="narration">
-          "I may be the last one standing, but I will never give up."
-        </div>
-      </div>
-    </div>
-
-    <div class="comic-panel">
-      <div class="panel-image">⚡</div>
-
-      <div class="panel-content">
-        <h3>Panel 3 — Final Battle</h3>
-
-        <p>
-          The hero uses his power and courage to fight the enemy.
-          The final battle begins.
-        </p>
-
-        <div class="narration">
-          "This is not the end. This is where our story begins."
-        </div>
-      </div>
-    </div>
+    <label>Story Duration</label>
+    <select id="duration">
+        <option>Short</option>
+        <option>Medium</option>
+        <option>Long</option>
+    </select>
 
     <button onclick="generateComic()">
-      Generate Comic
+        ✨ Generate Comic
     </button>
 
     <div id="message"></div>
+</div>
 
-  </div>
 
-  <footer>
-    © 2026 ComicCraft — AI Comic Story Creator
-  </footer>
+<div id="comicOutput">
 
-  <script>
-    function generateComic() {
-      document.getElementById("message").innerHTML =
-        "✨ Comic generated successfully — The Last Hero!";
+<div class="card">
+    <h2 id="comicTitle"></h2>
+    <p id="comicDescription"></p>
+</div>
+
+
+<div class="panel">
+
+    <div class="panel-image">
+        🌃
+    </div>
+
+    <div class="panel-content">
+        <h3>Panel 1 - The Beginning</h3>
+
+        <p>
+            A mysterious darkness appears across the city.
+            Everyone is searching for someone who can save them.
+        </p>
+
+        <div class="narration">
+            "When darkness rises, a hero will appear."
+        </div>
+    </div>
+
+</div>
+
+
+<div class="panel">
+
+    <div class="panel-image">
+        🦸
+    </div>
+
+    <div class="panel-content">
+        <h3>Panel 2 - The Hero</h3>
+
+        <p id="heroStory"></p>
+
+        <div class="narration">
+            "I will protect everyone, no matter what happens."
+        </div>
+    </div>
+
+</div>
+
+
+<div class="panel">
+
+    <div class="panel-image">
+        ⚡
+    </div>
+
+    <div class="panel-content">
+        <h3>Panel 3 - The Final Battle</h3>
+
+        <p>
+            The hero faces the powerful enemy in the final battle.
+            With courage and determination, the hero fights to save
+            humanity.
+        </p>
+
+        <div class="narration">
+            "This is not the end. This is our new beginning."
+        </div>
+    </div>
+
+</div>
+
+
+<button onclick="downloadComic()">
+    📥 Download Comic
+</button>
+
+</div>
+
+</div>
+
+<footer>
+    © 2026 ComicCraft - AI Comic Story Creator
+</footer>
+
+
+<script>
+
+function generateComic(){
+
+    const hero =
+        document.getElementById("heroName").value.trim();
+
+    const description =
+        document.getElementById("description").value.trim();
+
+    if(hero === ""){
+        alert("Please enter a hero name");
+        return;
     }
-  </script>
+
+    if(description === ""){
+        alert("Please enter a comic description");
+        return;
+    }
+
+    document.getElementById("comicTitle").innerText =
+        hero + " - The Comic";
+
+    document.getElementById("comicDescription").innerText =
+        description;
+
+    document.getElementById("heroStory").innerText =
+        hero +
+        " enters the city and discovers that a powerful enemy is threatening humanity. " +
+        hero +
+        " decides to fight back and become the hope of the people.";
+
+    document.getElementById("comicOutput").style.display =
+        "block";
+
+    document.getElementById("message").innerHTML =
+        '<p class="success">✨ Comic generated successfully!</p>';
+
+    window.scrollTo({
+        top: document.getElementById("comicOutput").offsetTop,
+        behavior: "smooth"
+    });
+}
+
+
+function downloadComic(){
+
+    const comicText =
+        document.getElementById("comicTitle").innerText +
+        "\n\n" +
+        document.getElementById("comicDescription").innerText +
+        "\n\n" +
+        document.getElementById("heroStory").innerText;
+
+    const blob =
+        new Blob([comicText], {type:"text/plain"});
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const a =
+        document.createElement("a");
+
+    a.href = url;
+    a.download = "ComicCraft-Comic.txt";
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+}
+
+</script>
 
 </body>
 </html>
